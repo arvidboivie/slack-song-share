@@ -1,0 +1,24 @@
+{
+    "name": "boivie/slack-song-share",
+    "description": "Post to a Slack channel when songs are added to a Spotify playlist",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arvid Boivie",
+            "email": "arvid.boivie@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "maknz/slack": "^1.7",
+        "psr/log": "^1.0",
+        "hassankhan/config": "^0.10.0",
+        "symfony/yaml": "^3.3",
+        "hellogerard/jobby": "^3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "SlackSongShare\\": "src/"
+        }
+    }
+}
