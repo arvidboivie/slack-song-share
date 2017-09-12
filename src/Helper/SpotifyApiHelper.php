@@ -1,6 +1,6 @@
 <?php
 
-namespace DailyDouble\Helper;
+namespace SlackSongShare\Helper;
 
 use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
