@@ -2,7 +2,7 @@
 
 namespace SlackSongShare\Command;
 
-use Boivie\SpotifyApiHelper;
+use Boivie\SpotifyApiHelper\SpotifyApiHelper;
 use Noodlehaus\Config;
 use \PDO;
 

@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use Boivie\SpotifyApiHelper;
+use Boivie\SpotifyApiHelper\SpotifyApiHelper;
 use Noodlehaus\Config;
 
 $config = Config::load('config.yml');
