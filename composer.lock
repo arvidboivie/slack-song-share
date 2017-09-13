@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "13a7c9cdc9a28918130275401ad26b40",
+    "content-hash": "5826ab3edc5773d5f338ad2061175623",
     "packages": [
         {
             "name": "boivie/spotify-api-helper",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/arvidboivie/spotify-api-helper.git",
-                "reference": "aaca5afa820ee9cf666c26fdb974522a60fc3bb6"
+                "reference": "b6aaf54587ad687dad290c6c920978bd769b52d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arvidboivie/spotify-api-helper/zipball/aaca5afa820ee9cf666c26fdb974522a60fc3bb6",
-                "reference": "aaca5afa820ee9cf666c26fdb974522a60fc3bb6",
+                "url": "https://api.github.com/repos/arvidboivie/spotify-api-helper/zipball/b6aaf54587ad687dad290c6c920978bd769b52d9",
+                "reference": "b6aaf54587ad687dad290c6c920978bd769b52d9",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                 "source": "https://github.com/arvidboivie/spotify-api-helper/tree/master",
                 "issues": "https://github.com/arvidboivie/spotify-api-helper/issues"
             },
-            "time": "2017-09-13T18:37:33+00:00"
+            "time": "2017-09-13T18:46:55+00:00"
         },
         {
             "name": "container-interop/container-interop",
@@ -1270,7 +1270,7 @@
     "stability-flags": {
         "boivie/spotify-api-helper": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
