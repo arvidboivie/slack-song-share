@@ -44,7 +44,7 @@ $app->get('/spotify/auth/', function (Request $request, Response $response) {
         $spotify['client_id'],
         $spotify['client_secret'],
         $spotify['redirect_URI'],
-        $spotify['api_url']
+        $spotify['api_user']
     );
 
     $code = $request->getQueryParams()['code'];
