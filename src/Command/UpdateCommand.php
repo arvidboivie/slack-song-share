@@ -17,6 +17,12 @@ class UpdateCommand
 
     public function getNewTracks()
     {
+        $dbConfig = $this->config->get('database');
+        $dsn = "mysql:host=".$dbConfig['host'].";dbname=".$dbConfig['name'].";charset=".$dbConfig['charset'];
+        $db = new PDO($dsn, $dbConfig['user'], $dbConfig['password']);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
         $spotify = $this->config->get('spotify');
         $api = (new SpotifyApiHelper(
             $db,
@@ -25,13 +31,7 @@ class UpdateCommand
             $spotify['redirect_URI']
         ))->getApiWrapper();
 
-        $dbConfig = $this->config->get('database');
-        $dsn = "mysql:host=".$dbConfig['host'].";dbname=".$dbConfig['name'].";charset=".$dbConfig['charset'];
-        $db = new PDO($dsn, $dbConfig['user'], $dbConfig['password']);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
-        $playlistTracks->items = $api->getUserPlaylistTracks($spotify['user_id'], $spotify['playlist_id']);
+        $playlistTracks = $api->getUserPlaylistTracks($spotify['user_id'], $spotify['playlist_id']);
 
         $trackStatement = $db->prepare(
             'INSERT INTO tracks(id, name, added_by)
@@ -41,11 +41,13 @@ class UpdateCommand
             added_by = :added_by'
         );
 
+
+
         foreach ($playlistTracks->items as $track) {
             $trackStatement->execute([
-                'id' => $track->id,
-                'name' => $track->name,
-                'added_by' => $added_by->id
+                'id' => $track->track->id,
+                'name' => $track->track->name,
+                'added_by' => $track->added_by->id
             ]);
         }
         // TODO: Get songs
