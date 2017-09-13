@@ -2,9 +2,9 @@
 
 namespace SlackSongShare\Command;
 
+use Boivie\SpotifyApiHelper;
 use Noodlehaus\Config;
 use \PDO;
-use SlackSongShare\Helper\SpotifyApiHelper;
 
 class UpdateCommand
 {
@@ -23,12 +23,13 @@ class UpdateCommand
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-        $spotify = $this->config->get('spotify');
+        $spotify = $this->config->get('spotify_api');
         $api = (new SpotifyApiHelper(
             $db,
             $spotify['client_id'],
             $spotify['client_secret'],
-            $spotify['redirect_URI']
+            $spotify['redirect_URI'],
+            $spotify['api_user']
         ))->getApiWrapper();
 
         $playlistTracks = $api->getUserPlaylistTracks($spotify['user_id'], $spotify['playlist_id']);
@@ -41,8 +42,6 @@ class UpdateCommand
             added_by = :added_by'
         );
 
-
-
         foreach ($playlistTracks->items as $track) {
             $trackStatement->execute([
                 'id' => $track->track->id,
@@ -50,9 +49,6 @@ class UpdateCommand
                 'added_by' => $track->added_by->id
             ]);
         }
-        // TODO: Get songs
-
-        // TODO: Save songs to DB
 
         // TODO: See if anyone is new.
     }
@@ -60,5 +56,7 @@ class UpdateCommand
     public function run()
     {
         $this->getNewTracks();
+
+        return true;
     }
 }

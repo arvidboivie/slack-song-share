@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c68f97aff0e7eb84854921254eed00ae",
+    "content-hash": "13a7c9cdc9a28918130275401ad26b40",
     "packages": [
+        {
+            "name": "boivie/spotify-api-helper",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arvidboivie/spotify-api-helper.git",
+                "reference": "c9117685e8df9902e09b8ad15f38bc7fc2ef202d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arvidboivie/spotify-api-helper/zipball/c9117685e8df9902e09b8ad15f38bc7fc2ef202d",
+                "reference": "c9117685e8df9902e09b8ad15f38bc7fc2ef202d",
+                "shasum": ""
+            },
+            "require": {
+                "jwilsson/spotify-web-api-php": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Boivie\\SpotifyApiHelper\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Arvid Boivie",
+                    "email": "arvid.boivie@gmail.com"
+                }
+            ],
+            "description": "Helps me use https://github.com/jwilsson/spotify-web-api-php/",
+            "support": {
+                "source": "https://github.com/arvidboivie/spotify-api-helper/tree/master",
+                "issues": "https://github.com/arvidboivie/spotify-api-helper/issues"
+            },
+            "time": "2017-09-13T16:49:28+00:00"
+        },
         {
             "name": "container-interop/container-interop",
             "version": "1.2.0",
@@ -1230,8 +1266,10 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "boivie/spotify-api-helper": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

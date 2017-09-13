@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use SlackSongShare\Helper\SpotifyApiHelper;
+use Boivie\SpotifyApiHelper;
 use Noodlehaus\Config;
 
 $config = Config::load('config.yml');
@@ -12,7 +12,7 @@ $config = Config::load('config.yml');
 $slimConfig = [
     'displayErrorDetails' => true,
     'db' => $config->get('database'),
-    'spotify' => $config->get('spotify'),
+    'spotify' => $config->get('spotify_api'),
 ];
 
 $app = new \Slim\App(['settings' => $slimConfig]);
@@ -43,7 +43,8 @@ $app->get('/spotify/auth/', function (Request $request, Response $response) {
         $this->db,
         $spotify['client_id'],
         $spotify['client_secret'],
-        $spotify['redirect_URI']
+        $spotify['redirect_URI'],
+        $spotify['api_url']
     );
 
     $code = $request->getQueryParams()['code'];

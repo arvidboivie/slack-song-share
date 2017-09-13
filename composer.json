@@ -2,13 +2,19 @@
     "name": "boivie/slack-song-share",
     "description": "Post to a Slack channel when songs are added to a Spotify playlist",
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:arvidboivie/spotify-api-helper.git"
+        }
+    ],
     "authors": [
         {
             "name": "Arvid Boivie",
             "email": "arvid.boivie@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "maknz/slack": "^1.7",
         "psr/log": "^1.0",
@@ -17,7 +23,8 @@
         "hellogerard/jobby": "^3.3",
         "slim/slim": "^3.8",
         "monolog/monolog": "^1.23",
-        "jwilsson/spotify-web-api-php": "^2.0"
+        "jwilsson/spotify-web-api-php": "^2.0",
+        "boivie/spotify-api-helper": "dev-master"
     },
     "autoload": {
         "psr-4": {
