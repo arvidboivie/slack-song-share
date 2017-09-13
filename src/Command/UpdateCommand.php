@@ -28,8 +28,7 @@ class UpdateCommand
             $db,
             $spotify['client_id'],
             $spotify['client_secret'],
-            $spotify['redirect_URI'],
-            $spotify['api_user']
+            $spotify['redirect_URI']
         ))->getApiWrapper();
 
         $playlistTracks = $api->getUserPlaylistTracks($spotify['user_id'], $spotify['playlist_id']);

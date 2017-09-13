@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/arvidboivie/spotify-api-helper.git",
-                "reference": "c9117685e8df9902e09b8ad15f38bc7fc2ef202d"
+                "reference": "5ae0ce0921eb058d12012a66ce01e17a87d4bf70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arvidboivie/spotify-api-helper/zipball/c9117685e8df9902e09b8ad15f38bc7fc2ef202d",
-                "reference": "c9117685e8df9902e09b8ad15f38bc7fc2ef202d",
+                "url": "https://api.github.com/repos/arvidboivie/spotify-api-helper/zipball/5ae0ce0921eb058d12012a66ce01e17a87d4bf70",
+                "reference": "5ae0ce0921eb058d12012a66ce01e17a87d4bf70",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                 "source": "https://github.com/arvidboivie/spotify-api-helper/tree/master",
                 "issues": "https://github.com/arvidboivie/spotify-api-helper/issues"
             },
-            "time": "2017-09-13T16:49:28+00:00"
+            "time": "2017-09-13T17:44:41+00:00"
         },
         {
             "name": "container-interop/container-interop",
