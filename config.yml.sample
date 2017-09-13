@@ -1,0 +1,13 @@
+database:
+    host: <your config here>
+    name: <your config here>
+    user: <your config here>
+    password: <your config here>
+    charset: <your config here>
+
+spotify:
+    client_id: <your config here>
+    client_secret: <your config here>
+    redirect_URI: <your config here>
+    playlist_id: // id of playlist you want to share (Get it from a Spotify-share url)
+    user_id: // Username of playlist owner
