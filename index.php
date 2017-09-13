@@ -12,7 +12,7 @@ $config = Config::load('config.yml');
 $slimConfig = [
     'displayErrorDetails' => true,
     'db' => $config->get('database'),
-    'spotify' => $config->get('spotify_api'),
+    'spotify' => $config->get('spotify'),
 ];
 
 $app = new \Slim\App(['settings' => $slimConfig]);
