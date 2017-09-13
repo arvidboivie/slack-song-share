@@ -12,7 +12,7 @@ class SpotifyApiHelper
     private $clientSecret;
     private $redirectURI;
 
-    public function __construct(\PDO $db, string $clientId, string $clientSecret)
+    public function __construct(\PDO $db, $clientId, $clientSecret, $redirectURI)
     {
         $this->db = $db;
         $this->clientId = $clientId;
@@ -74,9 +74,6 @@ class SpotifyApiHelper
 
     public function getApiWrapper()
     {
-        $session = new Session($this->clientId, $this->clientSecret);
-        $api = new SpotifyWebAPI();
-
         $tokenStatement = $this->db->prepare(
             "SELECT
             access_token,
@@ -93,9 +90,13 @@ class SpotifyApiHelper
         $accessToken = $result->access_token;
 
         if (time() > $result->expires) {
+            $session = new Session($this->clientId, $this->clientSecret);
+
             $session->refreshAccessToken($result->refresh_token);
             $accessToken = $session->getAccessToken();
         }
+
+        $api = new SpotifyWebAPI();
 
         // Set the access token on the API wrapper
         $api->setAccessToken($accessToken);
