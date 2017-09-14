@@ -2,9 +2,10 @@
 
 namespace SlackSongShare\Command;
 
+use \PDO;
 use Boivie\SpotifyApiHelper\SpotifyApiHelper;
 use Noodlehaus\Config;
-use \PDO;
+use SlackSongShare\Action\ShareAction;
 
 class UpdateCommand
 {
@@ -15,7 +16,7 @@ class UpdateCommand
         $this->config = $config;
     }
 
-    public function getNewTracks()
+    public function getTracks()
     {
         $dbConfig = $this->config->get('database');
         $dsn = "mysql:host=".$dbConfig['host'].";dbname=".$dbConfig['name'].";charset=".$dbConfig['charset'];
@@ -52,9 +53,18 @@ class UpdateCommand
         // TODO: See if anyone is new.
     }
 
+    public function shareNewTracks()
+    {
+        $shareAction = new ShareAction($this->config);
+
+        // $shareAction->perform();
+    }
+
     public function run()
     {
-        $this->getNewTracks();
+        $this->getTracks();
+
+        $this->shareNewTracks();
 
         return true;
     }

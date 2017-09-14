@@ -5,6 +5,9 @@ database:
     password: <your config here>
     charset: <your config here>
 
+slack:
+    hook_url: https://hooks.slack.com/services/<hook>
+
 spotify:
     client_id: <your config here>
     client_secret: <your config here>
