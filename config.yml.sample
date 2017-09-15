@@ -8,6 +8,7 @@ database:
 jobby:
     debug: false
     log: '../logs/command.log'
+    schedule: '* * * * *'
 
 slack:
     hook_url: https://hooks.slack.com/services/<hook>
