@@ -5,6 +5,10 @@ database:
     password: <your config here>
     charset: <your config here>
 
+jobby:
+    debug: false
+    log: '../logs/command.log'
+
 slack:
     hook_url: https://hooks.slack.com/services/<hook>
 

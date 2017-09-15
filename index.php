@@ -11,9 +11,9 @@ $config = Config::load('config.yml');
 
 $slimConfig = [
     'displayErrorDetails' => true,
-    'db' => $config->get('database'),
-    'spotify' => $config->get('spotify'),
 ];
+
+$slimConfig = array_merge($slimConfig, $config->all());
 
 $app = new \Slim\App(['settings' => $slimConfig]);
 
@@ -26,7 +26,7 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 $container['db'] = function ($c) {
-    $db = $c['settings']['db'];
+    $db = $c['settings']['database'];
 
     $dsn = "mysql:host=".$db['host'].";dbname=".$db['name'].";charset=".$db['charset'];
 
