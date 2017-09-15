@@ -7,16 +7,20 @@ use Maknz\Slack\Client;
 class ShareAction
 {
     private $config;
+    private $client;
 
     public function __construct($config)
     {
         $this->config = $config;
+        $this->client = $client = new Client($this->config->get('slack')['hook_url']);
     }
 
-    public function perform()
+    public function shareTrack($track)
     {
-        $client = new Client($this->config->get('slack')['hook_url']);
-
-        $client->send('Hello world!');
+        $this->client->send(sprintf(
+            '%s shared a song: %s',
+            $track['added_by'],
+            $this->config->get('spotify')['share_url'].$track['id']
+        ));
     }
 }

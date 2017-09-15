@@ -14,3 +14,4 @@ spotify:
     redirect_URI: <your config here>
     playlist_id: // id of playlist you want to share (Get it from a Spotify-share url)
     user_id: // Username of playlist owner
+    share_url: https://open.spotify.com/track/

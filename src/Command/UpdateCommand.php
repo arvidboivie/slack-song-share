@@ -10,23 +10,19 @@ use SlackSongShare\Action\ShareAction;
 class UpdateCommand
 {
     private $config;
+    private $db;
 
     public function __construct(Config $config)
     {
         $this->config = $config;
+        $this->setupDB();
     }
 
     public function getTracks()
     {
-        $dbConfig = $this->config->get('database');
-        $dsn = "mysql:host=".$dbConfig['host'].";dbname=".$dbConfig['name'].";charset=".$dbConfig['charset'];
-        $db = new PDO($dsn, $dbConfig['user'], $dbConfig['password']);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
         $spotify = $this->config->get('spotify');
         $api = (new SpotifyApiHelper(
-            $db,
+            $this->db,
             $spotify['client_id'],
             $spotify['client_secret'],
             $spotify['redirect_URI']
@@ -34,7 +30,7 @@ class UpdateCommand
 
         $playlistTracks = $api->getUserPlaylistTracks($spotify['user_id'], $spotify['playlist_id']);
 
-        $trackStatement = $db->prepare(
+        $trackStatement = $this->db->prepare(
             'INSERT INTO tracks(id, name, added_by)
             VALUES(:id, :name, :added_by)
             ON DUPLICATE KEY UPDATE
@@ -57,7 +53,15 @@ class UpdateCommand
     {
         $shareAction = new ShareAction($this->config);
 
-        // $shareAction->perform();
+        $unsharedTracks = $this->db->query('SELECT id, added_by FROM tracks WHERE shared = 0');
+
+        foreach ($unsharedTracks as $track) {
+            $shareAction->shareTrack($track);
+
+            $shareStatement = $this->db->prepare('UPDATE tracks SET shared = 1 WHERE id = :id');
+
+            $shareStatement->execute(['id' => $track['id']]);
+        }
     }
 
     public function run()
@@ -67,5 +71,14 @@ class UpdateCommand
         $this->shareNewTracks();
 
         return true;
+    }
+
+    private function setupDB()
+    {
+        $dbConfig = $this->config->get('database');
+        $dsn = "mysql:host=".$dbConfig['host'].";dbname=".$dbConfig['name'].";charset=".$dbConfig['charset'];
+        $this->db = new PDO($dsn, $dbConfig['user'], $dbConfig['password']);
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
 }
