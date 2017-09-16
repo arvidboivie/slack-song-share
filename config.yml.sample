@@ -15,8 +15,9 @@ slack:
 
 spotify:
     client_id: <your config here>
-    client_secret: <your config here>
-    redirect_URI: <your config here>
+    api_user: //user that is using the api
     playlist_id: // id of playlist you want to share (Get it from a Spotify-share url)
     user_id: // Username of playlist owner
     share_url: https://open.spotify.com/track/
+
+vault_url: https://www.example.com/vault/
