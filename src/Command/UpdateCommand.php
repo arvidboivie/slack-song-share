@@ -6,7 +6,7 @@ use \PDO;
 use GuzzleHttp;
 use Noodlehaus\Config;
 use SlackSongShare\Action\ShareAction;
-use SpotifyWebApi\SpotifyWebApi;
+use SpotifyWebAPI\SpotifyWebAPI;
 
 class UpdateCommand
 {
@@ -22,7 +22,7 @@ class UpdateCommand
     public function getTracks()
     {
         $spotify = $this->config->get('spotify');
-        $api = new SpotifyWebApi();
+        $api = new SpotifyWebAPI();
 
         $api->setAccessToken($this->getToken());
 
