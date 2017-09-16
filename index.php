@@ -36,32 +36,4 @@ $container['db'] = function ($c) {
     return $pdo;
 };
 
-$app->get('/spotify/auth/', function (Request $request, Response $response) {
-    $spotify = $this->get('settings')['spotify'];
-
-    $apiHelper = new SpotifyApiHelper(
-        $this->db,
-        $spotify['client_id'],
-        $spotify['client_secret'],
-        $spotify['redirect_URI']
-    );
-
-    $code = $request->getQueryParams()['code'];
-
-    if (empty($code) === true) {
-        $authorizeUrl = $apiHelper->getAuthorizeUrl([
-            'playlist-read-private',
-            'playlist-read-collaborative',
-        ]);
-
-        return $response->withRedirect($authorizeUrl, 302);
-    }
-
-    $apiHelper->getAccessToken($code);
-
-    $response->getBody()->write('Auth successful');
-
-    return $response;
-});
-
 $app->run();

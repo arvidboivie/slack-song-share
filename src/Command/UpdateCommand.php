@@ -3,9 +3,10 @@
 namespace SlackSongShare\Command;
 
 use \PDO;
-use Boivie\SpotifyApiHelper\SpotifyApiHelper;
+use GuzzleHttp;
 use Noodlehaus\Config;
 use SlackSongShare\Action\ShareAction;
+use SpotifyWebApi\SpotifyWebApi;
 
 class UpdateCommand
 {
@@ -21,12 +22,9 @@ class UpdateCommand
     public function getTracks()
     {
         $spotify = $this->config->get('spotify');
-        $api = (new SpotifyApiHelper(
-            $this->db,
-            $spotify['client_id'],
-            $spotify['client_secret'],
-            $spotify['redirect_URI']
-        ))->getApiWrapper();
+        $api = new SpotifyWebApi();
+
+        $api->setAccessToken($this->getToken());
 
         $playlistTracks = $api->getUserPlaylistTracks($spotify['user_id'], $spotify['playlist_id']);
 
@@ -45,8 +43,6 @@ class UpdateCommand
                 'added_by' => $track->added_by->id
             ]);
         }
-
-        // TODO: See if anyone is new.
     }
 
     public function shareNewTracks()
@@ -71,6 +67,27 @@ class UpdateCommand
         $this->shareNewTracks();
 
         return true;
+    }
+
+    private function getToken()
+    {
+        $vault_url = $this->config->get('vault_url');
+        $spotify = $this->config->get('spotify');
+
+        $client = new GuzzleHttp\Client();
+
+        $request = $client->request(
+            'GET',
+            $vault_url.$spotify['client_id'].'/'.$spotify['api_user']
+        );
+
+        $response = json_decode($request->getBody(), true);
+
+        if (empty($response['error']) === false) {
+            throw new Exception("Error getting token");
+        }
+
+        return $response['token'];
     }
 
     private function setupDB()
