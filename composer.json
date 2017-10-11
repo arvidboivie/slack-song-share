@@ -23,5 +23,8 @@
         "psr-4": {
             "SlackSongShare\\": "src/"
         }
+    },
+    "require-dev": {
+        "bmitch/churn-php": "^0.3.1"
     }
 }
